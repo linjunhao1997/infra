@@ -1,0 +1,457 @@
+syntax = "proto3";
+
+package system.v1;
+
+option go_package = "./v1";
+
+import "google/protobuf/any.proto";
+
+
+message	CommonIdData {
+	int64 id = 1;
+}
+
+message CommonPageData {
+    int64 currentPage = 1;
+    int64 pageSize = 2;
+    int64 total = 3;
+    repeated google.protobuf.Any list = 4;
+}
+
+message CommonIdDataResp {
+    uint32 code = 1;
+    string msg = 2;
+    string err = 3;
+    CommonIdData data = 4;
+ }
+
+message CommonResp {
+    uint32 code = 1;
+    string msg = 2;
+    string err = 3;
+    google.protobuf.Any data = 4;
+ }
+
+message CommonPageResp {
+    uint32 code = 1;
+    string msg = 2;
+    string err = 3;
+    CommonPageData data = 4;
+}
+message RoleData {
+    string gid = 1;
+    string name = 2;
+    string description = 3;
+    string forUserType = 4;
+    bool disabled = 5;
+    int64 ctime = 6;
+    int64 mtime = 7;
+}
+
+message QueryRoleDetailReq {
+    int64 id = 1;
+}
+
+message QueryRoleDetailResp {
+    uint32 code = 1;
+    string msg = 2;
+    string err = 3;
+    RoleData data = 4;
+}
+
+message QueryRoleListReq {
+    optional string name = 1;
+    optional int64 startCtime = 2;
+    optional int64 endCtime = 3;
+}
+
+message QueryRoleListResp {
+    uint32 code = 1;
+    string msg = 2;
+    string err = 3;
+    repeated RoleData data = 4;
+}
+
+message QueryRolePageReq {
+    int64 currentPage = 1;
+    int64 pageSize = 2;
+    optional string name = 3;
+    optional int64 startCtime = 4;
+    optional int64 endCtime = 5;
+}
+
+message RolePage {
+    int64 currentPage = 1;
+    int64 pageSize = 2;
+    int64 total = 3;
+    repeated RoleData list = 4;
+}
+
+message QueryRolePageResp {
+    uint32 code = 1;
+    string msg = 2;
+    string err = 3;
+    RolePage data = 4;
+}
+
+message CreateRoleReq {
+    string name = 1;
+    string forUserType = 2;
+    bool disabled = 3;
+}
+
+
+message UpdateRoleReq {
+    int64 id = 1;
+    optional string name = 2;
+    optional bool disabled = 3;
+}
+
+message UpsertRoleReq {
+    int64 id = 1;
+}
+
+message RemoveRoleReq {
+    int64 id = 1;
+}
+
+message DeleteRoleReq {
+    int64 id = 1;
+}
+message UserData {
+    string uid = 1;
+    string name = 2;
+    string email = 3;
+    string phone = 4;
+    bool disabled = 5;
+    int64 ctime = 6;
+    int64 mtime = 7;
+}
+
+message QueryUserDetailReq {
+    int64 id = 1;
+}
+
+message QueryUserDetailResp {
+    uint32 code = 1;
+    string msg = 2;
+    string err = 3;
+    UserData data = 4;
+}
+
+message QueryUserListReq {
+    optional int64 startCtime = 1;
+    optional int64 endCtime = 2;
+    optional bool ctimeDesc = 3;
+}
+
+message QueryUserListResp {
+    uint32 code = 1;
+    string msg = 2;
+    string err = 3;
+    repeated UserData data = 4;
+}
+
+message QueryUserPageReq {
+    int64 currentPage = 1;
+    int64 pageSize = 2;
+    optional int64 startCtime = 3;
+    optional int64 endCtime = 4;
+    optional bool ctimeDesc = 5;
+}
+
+message UserPage {
+    int64 currentPage = 1;
+    int64 pageSize = 2;
+    int64 total = 3;
+    repeated UserData list = 4;
+}
+
+message QueryUserPageResp {
+    uint32 code = 1;
+    string msg = 2;
+    string err = 3;
+    UserPage data = 4;
+}
+
+message CreateUserReq {
+    string name = 1;
+    string email = 2;
+    string phone = 3;
+}
+
+
+message UpdateUserReq {
+    int64 id = 1;
+    optional string email = 2;
+    optional string phone = 3;
+    optional bool disabled = 4;
+}
+
+message UpsertUserReq {
+    int64 id = 1;
+}
+
+message RemoveUserReq {
+    int64 id = 1;
+}
+
+message DeleteUserReq {
+    int64 id = 1;
+}
+message AdminData {
+    int64 id = 1;
+    string gid = 2;
+    string uid = 3;
+    bool disabled = 4;
+    int64 ctime = 5;
+    int64 mtime = 6;
+    RoleData roles = 7;
+}
+
+message QueryAdminDetailReq {
+    int64 id = 1;
+}
+
+message QueryAdminDetailResp {
+    uint32 code = 1;
+    string msg = 2;
+    string err = 3;
+    AdminData data = 4;
+}
+
+message QueryAdminListReq {
+    optional int64 startCtime = 1;
+    optional int64 endCtime = 2;
+    optional bool ctimeDesc = 3;
+}
+
+message QueryAdminListResp {
+    uint32 code = 1;
+    string msg = 2;
+    string err = 3;
+    repeated AdminData data = 4;
+}
+
+message QueryAdminPageReq {
+    int64 currentPage = 1;
+    int64 pageSize = 2;
+    optional int64 startCtime = 3;
+    optional int64 endCtime = 4;
+    optional bool ctimeDesc = 5;
+}
+
+message AdminPage {
+    int64 currentPage = 1;
+    int64 pageSize = 2;
+    int64 total = 3;
+    repeated AdminData list = 4;
+}
+
+message QueryAdminPageResp {
+    uint32 code = 1;
+    string msg = 2;
+    string err = 3;
+    AdminPage data = 4;
+}
+
+message CreateAdminReq {
+    string name = 1;
+    string pwd = 2;
+    bool disabled = 3;
+}
+
+
+message UpdateAdminReq {
+    int64 id = 1;
+    optional string name = 2;
+    optional string pwd = 3;
+    optional bool disabled = 4;
+}
+
+message UpsertAdminReq {
+    int64 id = 1;
+}
+
+message RemoveAdminReq {
+    int64 id = 1;
+}
+
+message DeleteAdminReq {
+    int64 id = 1;
+}
+message SysadminData {
+    int64 id = 1;
+    string uid = 2;
+    string name = 3;
+    int64 disabled = 4;
+    int64 ctime = 5;
+    int64 mtime = 6;
+    RoleData roles = 7;
+}
+
+message QuerySysadminDetailReq {
+    int64 id = 1;
+}
+
+message QuerySysadminDetailResp {
+    uint32 code = 1;
+    string msg = 2;
+    string err = 3;
+    SysadminData data = 4;
+}
+
+message QuerySysadminListReq {
+    optional string uid = 1;
+    optional string name = 2;
+    repeated int64 disabled = 3;
+    optional int64 startCtime = 4;
+    optional int64 endCtime = 5;
+    optional bool ctimeDesc = 6;
+}
+
+message QuerySysadminListResp {
+    uint32 code = 1;
+    string msg = 2;
+    string err = 3;
+    repeated SysadminData data = 4;
+}
+
+message QuerySysadminPageReq {
+    int64 currentPage = 1;
+    int64 pageSize = 2;
+    optional string uid = 3;
+    optional string name = 4;
+    repeated int64 disabled = 5;
+    optional int64 startCtime = 6;
+    optional int64 endCtime = 7;
+    optional bool ctimeDesc = 8;
+}
+
+message SysadminPage {
+    int64 currentPage = 1;
+    int64 pageSize = 2;
+    int64 total = 3;
+    repeated SysadminData list = 4;
+}
+
+message QuerySysadminPageResp {
+    uint32 code = 1;
+    string msg = 2;
+    string err = 3;
+    SysadminPage data = 4;
+}
+
+message CreateSysadminReq {
+    string name = 1;
+    string pwd = 2;
+    int64 disabled = 3;
+}
+
+
+message UpdateSysadminReq {
+    int64 id = 1;
+    optional string name = 2;
+    optional string pwd = 3;
+    optional int64 disabled = 4;
+}
+
+message UpsertSysadminReq {
+    int64 id = 1;
+}
+
+message RemoveSysadminReq {
+    int64 id = 1;
+}
+
+message DeleteSysadminReq {
+    int64 id = 1;
+}
+
+message GetAuthTokenReq {
+   InternalAuthMode internalAuthMode = 1;
+   SSOAuthMode ssoAuthMode = 2;
+   Oauth2AuthMode oauth2AuthMode = 3;
+}
+
+message InternalAuthMode {
+    optional string uid = 1;
+    optional string email = 2;
+    string pwd = 3;
+}
+message SSOAuthMode {
+    string iam = 1; 
+    string idaas = 2;
+}
+message Oauth2AuthMode {
+    string code = 1;
+    string clientId = 2;
+}
+
+message GetAuthTokenResp {
+    uint32 code = 1;
+    string msg = 2;
+    string err = 3;
+    GetAuthTokenData data = 4;
+}
+
+message GetAuthTokenData {
+    string authToken = 1;
+}
+
+service systemService {
+    rpc QueryRoleDetail(QueryRoleDetailReq) returns (QueryRoleDetailResp);
+    
+    rpc QueryRoleList(QueryRoleListReq) returns (QueryRoleListResp);
+
+    rpc QueryRolePage(QueryRolePageReq) returns (QueryRolePageResp);
+
+    rpc CreateRole(CreateRoleReq) returns (CommonIdDataResp);
+
+    rpc UpdateRole(UpdateRoleReq) returns (CommonResp);
+
+    rpc DeleteRole(DeleteRoleReq) returns (CommonResp);
+
+
+    rpc QueryUserDetail(QueryUserDetailReq) returns (QueryUserDetailResp);
+    
+    rpc QueryUserList(QueryUserListReq) returns (QueryUserListResp);
+
+    rpc QueryUserPage(QueryUserPageReq) returns (QueryUserPageResp);
+
+    rpc CreateUser(CreateUserReq) returns (CommonIdDataResp);
+
+    rpc UpdateUser(UpdateUserReq) returns (CommonResp);
+
+    rpc DeleteUser(DeleteUserReq) returns (CommonResp);
+
+
+    rpc QueryAdminDetail(QueryAdminDetailReq) returns (QueryAdminDetailResp);
+    
+    rpc QueryAdminList(QueryAdminListReq) returns (QueryAdminListResp);
+
+    rpc QueryAdminPage(QueryAdminPageReq) returns (QueryAdminPageResp);
+
+    rpc CreateAdmin(CreateAdminReq) returns (CommonIdDataResp);
+
+    rpc UpdateAdmin(UpdateAdminReq) returns (CommonResp);
+
+    rpc DeleteAdmin(DeleteAdminReq) returns (CommonResp);
+
+
+    rpc QuerySysadminDetail(QuerySysadminDetailReq) returns (QuerySysadminDetailResp);
+    
+    rpc QuerySysadminList(QuerySysadminListReq) returns (QuerySysadminListResp);
+
+    rpc QuerySysadminPage(QuerySysadminPageReq) returns (QuerySysadminPageResp);
+
+    rpc CreateSysadmin(CreateSysadminReq) returns (CommonIdDataResp);
+
+    rpc UpdateSysadmin(UpdateSysadminReq) returns (CommonResp);
+
+    rpc DeleteSysadmin(DeleteSysadminReq) returns (CommonResp);
+
+
+    rpc GetAuthToken(GetAuthTokenReq) returns (GetAuthTokenResp);
+}
+

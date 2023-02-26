@@ -1,0 +1,104 @@
+type (
+    UserData {
+        Name string `json:"name"`
+        Email string `json:"email"`
+        Phone string `json:"phone"`
+        Ctime int64 `json:"ctime"`
+        Mtime int64 `json:"mtime"`
+    }
+
+    QueryUserDetailReq {
+        Id int64 `path:"id"`
+    }
+
+    QueryUserDetailResp {
+        Code uint32 `json:"code"`
+        Msg string `json:"msg"`
+        Err string `json:"err"`
+        Data *UserData `json:"data"`
+    }
+    
+    QueryUserListReq {
+        StartCtime *int64 `json:"startCtime"`
+        EndCtime *int64 `json:"endCtime"`
+        CtimeDesc bool `json:"ctimeDesc"`
+    }
+
+    QueryUserListResp {
+        Code uint32 `json:"code"`
+        Msg string `json:"msg"`
+        Err string `json:"err"`
+        Data []*UserData `json:"data"`
+    }
+
+    QueryUserPageReq {
+        CurrentPage int64 `json:"currentPage"`
+        PageSize int64 `json:"pageSize"`
+        StartCtime *int64 `json:"startCtime"`
+        EndCtime *int64 `json:"endCtime"`
+        CtimeDesc bool `json:"ctimeDesc"`
+    }
+
+    UserPage {
+        CurrentPage int64 `json:"currentPage"`
+        PageSize int64 `json:"pageSize"`
+        Total int64 `json:"total"`
+        List []*UserData `json:"list"`
+    }
+    QueryUserPageResp {
+        Code uint32 `json:"code"`
+        Msg string `json:"msg"`
+        Err string `json:"err"`
+        Data UserPage `json:"data"`
+    }
+
+    CreateUserReq {
+        Name string `json:"name"`
+        Email string `json:"email"`
+        Phone string `json:"phone"`
+    }
+
+
+    UpdateUserReq {
+        Id int64 `path:"id"`
+        Email *string `json:"email"`
+        Phone *string `json:"phone"`
+        Disabled *bool `json:"disabled"`
+    }
+
+    UpsertUserReq {
+        Id int64 `path:"id"`
+    }
+
+    RemoveUserReq {
+        Id int64 `path:"id"`
+    }
+
+    DeleteUserReq {
+        Id int64 `path:"id"`
+    }
+)
+
+@server(
+    group: useraccount/user
+    prefix: system/api/v1
+)
+service gateway-api {
+    @handler QueryUserDetail
+    get /useraccount/user/:id (QueryUserDetailReq) returns (QueryUserDetailResp)
+
+    @handler QueryUserList
+    get /useraccount/user/list (QueryUserListReq) returns (QueryUserListResp)
+
+    @handler QueryUserPage
+    get /useraccount/user/page (QueryUserPageReq) returns (QueryUserPageResp)
+
+    @handler  CreateUser
+    post /useraccount/user (CreateUserReq) returns (CommonResp)
+
+    @handler  UpdateUser
+    patch /useraccount/user/:id (UpdateUserReq) returns (CommonResp)
+
+    @handler DeleteUser
+    delete /useraccount/user/:id (DeleteUserReq) returns (CommonResp)
+}

@@ -1,0 +1,120 @@
+type (
+    SysadminData {
+        Name string `json:"name"`
+        Pwd string `json:"pwd"`
+        Disabled int64 `json:"disabled"`
+        Ctime int64 `json:"ctime"`
+        Mtime int64 `json:"mtime"`
+        Roles []*RoleData `json:"roles"`
+    }
+
+    QuerySysadminDetailReq {
+        Id int64 `path:"id"`
+    }
+
+    QuerySysadminDetailResp {
+        Code uint32 `json:"code"`
+        Msg string `json:"msg"`
+        Err string `json:"err"`
+        Data *SysadminData `json:"data"`
+    }
+    
+    QuerySysadminListReq {
+        Uid *string `json:"uid"`
+        Name *string `json:"name"`
+        Disabled []*int64 `json:"disabled"`
+        StartCtime *int64 `json:"startCtime"`
+        EndCtime *int64 `json:"endCtime"`
+        CtimeDesc bool `json:"ctimeDesc"`
+    }
+
+    QuerySysadminListResp {
+        Code uint32 `json:"code"`
+        Msg string `json:"msg"`
+        Err string `json:"err"`
+        Data []*SysadminData `json:"data"`
+    }
+
+    QuerySysadminPageReq {
+        CurrentPage int64 `json:"currentPage"`
+        PageSize int64 `json:"pageSize"`
+        Uid *string `json:"uid"`
+        Name *string `json:"name"`
+        Disabled []*int64 `json:"disabled"`
+        StartCtime *int64 `json:"startCtime"`
+        EndCtime *int64 `json:"endCtime"`
+        CtimeDesc bool `json:"ctimeDesc"`
+    }
+
+    SysadminPage {
+        CurrentPage int64 `json:"currentPage"`
+        PageSize int64 `json:"pageSize"`
+        Total int64 `json:"total"`
+        List []*SysadminData `json:"list"`
+    }
+    QuerySysadminPageResp {
+        Code uint32 `json:"code"`
+        Msg string `json:"msg"`
+        Err string `json:"err"`
+        Data SysadminPage `json:"data"`
+    }
+
+    CreateSysadminReq {
+        Name string `json:"name"`
+        Pwd string `json:"pwd"`
+        Disabled int64 `json:"disabled"`
+    }
+
+
+    UpdateSysadminReq {
+        Id int64 `path:"id"`
+        Name *string `json:"name"`
+        Pwd *string `json:"pwd"`
+        Disabled *int64 `json:"disabled"`
+    }
+
+    UpsertSysadminReq {
+        Id int64 `path:"id"`
+    }
+
+    RemoveSysadminReq {
+        Id int64 `path:"id"`
+    }
+
+    DeleteSysadminReq {
+        Id int64 `path:"id"`
+    }
+
+    AuthenticateSysadmin {
+        Uid *string `json:"uid"`
+        Email *string `json:"email"`
+        Pwd string `json:"pwd"`
+    }
+)
+
+@server(
+    group: useraccount/sysadmin
+    prefix: system/api/v1
+)
+service gateway-api {
+    @handler QuerySysadminDetail
+    get /useraccount/sysadmin/:id (QuerySysadminDetailReq) returns (QuerySysadminDetailResp)
+
+    @handler QuerySysadminList
+    get /useraccount/sysadmin/list (QuerySysadminListReq) returns (QuerySysadminListResp)
+
+    @handler QuerySysadminPage
+    get /useraccount/sysadmin/page (QuerySysadminPageReq) returns (QuerySysadminPageResp)
+
+    @handler  CreateSysadmin
+    post /useraccount/sysadmin (CreateSysadminReq) returns (CommonResp)
+
+    @handler  UpdateSysadmin
+    patch /useraccount/sysadmin/:id (UpdateSysadminReq) returns (CommonResp)
+
+    @handler DeleteSysadmin
+    delete /useraccount/sysadmin/:id (DeleteSysadminReq) returns (CommonResp)
+
+    @handler AuthenticateSysadmin
+    post /useraccount/sysadmin/authenticate (AuthenticateSysadmin) returns (CommonResp)
+}

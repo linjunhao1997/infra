@@ -1,0 +1,103 @@
+type (
+    RoleData {
+        Name string `json:"name"`
+        ForUserType string `json:"forUserType"`
+        Disabled bool `json:"dsiabled"`
+        Ctime int64 `json:"ctime"`
+        Mtime int64 `json:"mtime"`
+    }
+
+    QueryRoleDetailReq {
+        Id int64 `path:"id"`
+    }
+
+    QueryRoleDetailResp {
+        Code uint32 `json:"code"`
+        Msg string `json:"msg"`
+        Err string `json:"err"`
+        Data *RoleData `json:"data"`
+    }
+    
+    QueryRoleListReq {
+        Name *string `json:"name"`
+        StartCtime *int64 `json:"startCtime"`
+        EndCtime *int64 `json:"endCtime"`
+    }
+
+    QueryRoleListResp {
+        Code uint32 `json:"code"`
+        Msg string `json:"msg"`
+        Err string `json:"err"`
+        Data []*RoleData `json:"data"`
+    }
+
+    QueryRolePageReq {
+        CurrentPage int64 `json:"currentPage"`
+        PageSize int64 `json:"pageSize"`
+        Name *string `json:"name"`
+        StartCtime *int64 `json:"startCtime"`
+        EndCtime *int64 `json:"endCtime"`
+    }
+
+    RolePage {
+        CurrentPage int64 `json:"currentPage"`
+        PageSize int64 `json:"pageSize"`
+        Total int64 `json:"total"`
+        List []*RoleData `json:"list"`
+    }
+    QueryRolePageResp {
+        Code uint32 `json:"code"`
+        Msg string `json:"msg"`
+        Err string `json:"err"`
+        Data RolePage `json:"data"`
+    }
+
+    CreateRoleReq {
+        Name string `json:"name"`
+        ForUserType string `json:"forUserType"`
+        Disabled bool `json:"dsiabled"`
+    }
+
+
+    UpdateRoleReq {
+        Id int64 `path:"id"`
+        Name *string `json:"name"`
+        Disabled *bool `json:"dsiabled"`
+    }
+
+    UpsertRoleReq {
+        Id int64 `path:"id"`
+    }
+
+    RemoveRoleReq {
+        Id int64 `path:"id"`
+    }
+
+    DeleteRoleReq {
+        Id int64 `path:"id"`
+    }
+)
+
+@server(
+    group: useraccount/role
+    prefix: system/api/v1
+)
+service gateway-api {
+    @handler QueryRoleDetail
+    get /useraccount/role/:id (QueryRoleDetailReq) returns (QueryRoleDetailResp)
+
+    @handler QueryRoleList
+    get /useraccount/role/list (QueryRoleListReq) returns (QueryRoleListResp)
+
+    @handler QueryRolePage
+    get /useraccount/role/page (QueryRolePageReq) returns (QueryRolePageResp)
+
+    @handler  CreateRole
+    post /useraccount/role (CreateRoleReq) returns (CommonResp)
+
+    @handler  UpdateRole
+    patch /useraccount/role/:id (UpdateRoleReq) returns (CommonResp)
+
+    @handler DeleteRole
+    delete /useraccount/role/:id (DeleteRoleReq) returns (CommonResp)
+}

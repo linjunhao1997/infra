@@ -1,0 +1,146 @@
+syntax = "proto3";
+
+package system.v1;
+
+option go_package = "./v1";
+
+import "google/protobuf/any.proto";
+
+
+message	CommonIdData {
+	int64 id = 1;
+}
+
+message CommonPageData {
+    int64 currentPage = 1;
+    int64 pageSize = 2;
+    int64 total = 3;
+    repeated google.protobuf.Any list = 4;
+}
+
+message CommonIdDataResp {
+    uint32 code = 1;
+    string msg = 2;
+    string err = 3;
+    CommonIdData data = 4;
+ }
+
+message CommonResp {
+    uint32 code = 1;
+    string msg = 2;
+    string err = 3;
+    google.protobuf.Any data = 4;
+ }
+
+message CommonPageResp {
+    uint32 code = 1;
+    string msg = 2;
+    string err = 3;
+    CommonPageData data = 4;
+}
+message WebApiData {
+    int64 id = 1;
+    string code = 2;
+    string url = 3;
+    bool isOnline = 4;
+    string description = 5;
+    int64 ctime = 6;
+    int64 mtime = 7;
+    string creatorUid = 8;
+    string modifierUid = 9;
+}
+
+message QueryWebApiDetailReq {
+    int64 id = 1;
+}
+
+message QueryWebApiDetailResp {
+    uint32 code = 1;
+    string msg = 2;
+    string err = 3;
+    WebApiData data = 4;
+}
+
+message QueryWebApiListReq {
+    optional string code = 1;
+    optional string url = 2;
+    optional bool isOnline = 3;
+}
+
+message QueryWebApiListResp {
+    uint32 code = 1;
+    string msg = 2;
+    string err = 3;
+    repeated WebApiData data = 4;
+}
+
+message QueryWebApiPageReq {
+    int64 currentPage = 1;
+    int64 pageSize = 2;
+    optional string code = 3;
+    optional string url = 4;
+    optional bool isOnline = 5;
+}
+
+message WebApiPage {
+    int64 currentPage = 1;
+    int64 pageSize = 2;
+    int64 total = 3;
+    repeated WebApiData list = 4;
+}
+
+message QueryWebApiPageResp {
+    uint32 code = 1;
+    string msg = 2;
+    string err = 3;
+    WebApiPage data = 4;
+}
+
+message CreateWebApiReq {
+    string code = 1;
+    string url = 2;
+    bool isOnline = 3;
+    string description = 4;
+}
+
+
+message UpdateWebApiReq {
+    int64 id = 1;
+    optional string code = 2;
+    optional string url = 3;
+    optional bool isOnline = 4;
+    optional string description = 5;
+}
+
+message UpsertWebApiReq {
+    int64 id = 1;
+}
+
+message RemoveWebApiReq {
+    int64 id = 1;
+}
+
+message DeleteWebApiReq {
+    int64 id = 1;
+}
+
+service systemService {
+    rpc QueryWebApiDetail(QueryWebApiDetailReq) returns (QueryWebApiDetailResp);
+    
+    rpc QueryWebApiList(QueryWebApiListReq) returns (QueryWebApiListResp);
+
+    rpc QueryWebApiPage(QueryWebApiPageReq) returns (QueryWebApiPageResp);
+
+    rpc CreateWebApi(CreateWebApiReq) returns (CommonIdDataResp);
+
+    rpc UpdateWebApi(UpdateWebApiReq) returns (CommonResp);
+
+    rpc DeleteWebApi(DeleteWebApiReq) returns (CommonResp);
+
+
+}
+
+
+
+}
+

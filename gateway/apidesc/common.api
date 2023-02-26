@@ -1,0 +1,27 @@
+type (
+	CommonIdData {
+		id int64 `json:"id"`
+	}
+
+    CommonPageData {
+        CurrentPage int64 `json:"currentPage"`
+        PageSize int64 `json:"pageSize"`
+        Total int64 `json:"total"`
+        List interface{} `json:"list"`
+    }
+
+	CommonResp {
+        Code string `json:"code"`
+        Msg string `json:"msg"`
+        Err string `json:"err"`
+        Data interface{} `json:"data"`
+    }
+
+    CommonPageResp {
+        Code string `json:"code"`
+        Msg string `json:"msg"`
+        Err string `json:"err"`
+        Data CommonPageData `json:"data"`
+    }
+
+)

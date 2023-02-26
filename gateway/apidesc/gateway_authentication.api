@@ -1,0 +1,43 @@
+type (
+    GetAuthTokenReq {
+        InternalAuthMode *InternalAuthMode `json:"internalAuthMode"`
+        ssoAuthMode *SSOAuthMode `json:"ssoAuthMode"`
+        oauth2AuthMode *Oauth2AuthMode `json:"oauth2AuthMode"`
+    }
+
+    InternalAuthMode {
+        Uid *string `json:"uid"`
+        Email *string `json:"email"`
+        Pwd string `json:"pwd"`
+    }
+
+    SSOAuthMode {
+        IAM *string `json:"iam"`
+        IDAAS *string `json:"idaas"`
+    }
+
+    Oauth2AuthMode {
+        Code string `json:"code"`
+        ClientId string `json:"clientId"`
+    }
+
+    GetAuthTokenResp {
+        Code string `json:"code"`
+        Msg string `json:"msg"`
+        Err string `json:"err"`
+        Data GetAuthTokenData `json:"data"`
+    }
+
+    GetAuthTokenData {
+        AuthToken string `json:"authToken"`
+    }
+)
+
+@server(
+    group: authentication
+    prefix: system/api/v1
+)
+service gateway-api {
+    @handler GetAuthToken
+    post /authentication/getauthtoken (GetAuthTokenReq) returns (GetAuthTokenResp)
+}
