@@ -11,14 +11,14 @@ type (
     }
 
 	CommonResp {
-        Code string `json:"code"`
+        Code uint32 `json:"code"`
         Msg string `json:"msg"`
         Err string `json:"err"`
         Data interface{} `json:"data"`
     }
 
     CommonPageResp {
-        Code string `json:"code"`
+        Code uint32 `json:"code"`
         Msg string `json:"msg"`
         Err string `json:"err"`
         Data CommonPageData `json:"data"`

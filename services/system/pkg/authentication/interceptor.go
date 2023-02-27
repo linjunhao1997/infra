@@ -9,8 +9,6 @@ import (
 	"google.golang.org/grpc/metadata"
 )
 
-const CtxUserSessionKey = "UserSession"
-
 func UnaryAuthenticationInterceptor(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (resp interface{}, err error) {
 	md, _ := metadata.FromIncomingContext(ctx)
 	vals1 := md.Get(constant.AuthTokenKey)

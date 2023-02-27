@@ -22,7 +22,7 @@ type (
     }
 
     GetAuthTokenResp {
-        Code string `json:"code"`
+        Code uint32 `json:"code"`
         Msg string `json:"msg"`
         Err string `json:"err"`
         Data GetAuthTokenData `json:"data"`

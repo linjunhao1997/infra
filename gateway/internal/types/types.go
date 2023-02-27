@@ -13,14 +13,14 @@ type CommonPageData struct {
 }
 
 type CommonResp struct {
-	Code string      `json:"code"`
+	Code uint32      `json:"code"`
 	Msg  string      `json:"msg"`
 	Err  string      `json:"err"`
 	Data interface{} `json:"data"`
 }
 
 type CommonPageResp struct {
-	Code string         `json:"code"`
+	Code uint32         `json:"code"`
 	Msg  string         `json:"msg"`
 	Err  string         `json:"err"`
 	Data CommonPageData `json:"data"`
@@ -49,7 +49,7 @@ type Oauth2AuthMode struct {
 }
 
 type GetAuthTokenResp struct {
-	Code string           `json:"code"`
+	Code uint32           `json:"code"`
 	Msg  string           `json:"msg"`
 	Err  string           `json:"err"`
 	Data GetAuthTokenData `json:"data"`

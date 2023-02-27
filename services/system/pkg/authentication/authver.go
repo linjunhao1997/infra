@@ -6,5 +6,13 @@ import (
 )
 
 func GetAuthVer(ctx context.Context, gid string) (string, error) {
-	return cache.RedisClient.Get(ctx, string(cache.BuildAuthVerKey(gid))).Result()
+	return cache.RedisClient.Get(ctx, string(BuildAuthVerKey(gid))).Result()
+}
+
+func UpdateAuthVer(ctx context.Context, gid string) error {
+	_, err := cache.RedisClient.Incr(ctx, string(BuildAuthVerKey(gid))).Result()
+	if err != nil {
+		return err
+	}
+	return nil
 }

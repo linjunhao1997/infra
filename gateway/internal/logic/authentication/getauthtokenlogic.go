@@ -5,6 +5,7 @@ import (
 
 	"infra/gateway/internal/svc"
 	"infra/gateway/internal/types"
+	v1 "infra/services/system/pb/v1"
 
 	"github.com/zeromicro/go-zero/core/logx"
 )
@@ -24,7 +25,23 @@ func NewGetAuthTokenLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetA
 }
 
 func (l *GetAuthTokenLogic) GetAuthToken(req *types.GetAuthTokenReq) (resp *types.GetAuthTokenResp, err error) {
-	// todo: add your logic here and delete this line
+	res, err := l.svcCtx.SystemSvc.GetAuthToken(l.ctx, &v1.GetAuthTokenReq{
+		InternalAuthMode: &v1.InternalAuthMode{
+			Uid:   req.InternalAuthMode.Uid,
+			Email: req.InternalAuthMode.Email,
+			Pwd:   req.InternalAuthMode.Pwd,
+		},
+	})
+	if err != nil {
+		return nil, err
+	}
 
-	return
+	return &types.GetAuthTokenResp{
+		Code: res.Code,
+		Msg:  "success",
+		Err:  res.Err,
+		Data: types.GetAuthTokenData{
+			AuthToken: res.Data.AuthToken,
+		},
+	}, nil
 }
