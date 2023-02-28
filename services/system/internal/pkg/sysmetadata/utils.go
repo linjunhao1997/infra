@@ -4,8 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"infra/server"
-	"infra/services/system/pkg/cache"
+	"infra/services/system/internal/pkg/store"
 	"infra/types"
 	"strings"
 	"time"
@@ -20,7 +19,7 @@ import (
 )
 
 var (
-	SysMetadataUtil                          = newSysMetadataUtils(server.GormDB, cache.RedisClient)
+	SysMetadataUtil                          = newSysMetadataUtils(store.GormDB, store.RedisClient)
 	SysMetadataExpiration      time.Duration = 0
 	errSysMetadataCacheEmpty                 = errors.New("sysmetadata cache empty")
 	errSysMetadataCacheExpired               = errors.New("sysmetadata cache expired")
@@ -52,7 +51,7 @@ func (utils *SysMetadataUtils) GetSysMetadata(ctx context.Context, typeName, cod
 
 	// 使用分布式锁防止缓存击穿
 	lockKey := utils.cacheUtils.BuildLockKey(typeName, code)
-	mutex, err := gutils.NewRedLockUtil(cache.RedisClient).Lock(ctx, lockKey, 3*time.Second)
+	mutex, err := gutils.NewRedLockUtil(store.RedisClient).Lock(ctx, lockKey, 3*time.Second)
 	if err != nil {
 		return nil, err
 	}
@@ -107,7 +106,7 @@ func (utils *SysMetadataUtils) GetSysMetadataList(ctx context.Context, typeName 
 	// 使用分布式锁防止缓存击穿
 
 	lockKey := utils.cacheUtils.BuildLockKey(typeName, "")
-	mutex, err := gutils.NewRedLockUtil(cache.RedisClient).Lock(ctx, lockKey, 3*time.Second)
+	mutex, err := gutils.NewRedLockUtil(store.RedisClient).Lock(ctx, lockKey, 3*time.Second)
 	if err != nil {
 		return nil, err
 	}

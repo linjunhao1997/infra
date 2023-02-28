@@ -369,9 +369,10 @@ message DeleteSysadminReq {
 }
 
 message GetAuthTokenReq {
-   InternalAuthMode internalAuthMode = 1;
-   SSOAuthMode ssoAuthMode = 2;
-   Oauth2AuthMode oauth2AuthMode = 3;
+   string UserType = 1;
+   InternalAuthMode internalAuthMode = 2;
+   SSOAuthMode ssoAuthMode = 3;
+   Oauth2AuthMode oauth2AuthMode = 4;
 }
 
 message InternalAuthMode {

@@ -127,6 +127,7 @@ type IDAO[T any] interface {
 	FindById(ctx context.Context, id int64) (*T, error)
 	FindByIds(ctx context.Context, ids []int64) ([]*T, error)
 	Find(ctx context.Context, query Query) ([]*T, error)
+	FindOne(ctx context.Context, filter Filter) (*T, error)
 	FindPage(ctx context.Context, query Query) (Page[T], error)
 	Count(ctx context.Context, filter Filter) (int64, error)
 	UpdateByModel(ctx context.Context, id int64, data *T) (int64, error)
@@ -222,6 +223,17 @@ func (dao *DAO[T]) FindPage(ctx context.Context, query Query, count bool) (*Page
 		List:        list,
 		Total:       total,
 	}, nil
+}
+
+func (dao DAO[T]) FindOne(ctx context.Context, filter Filter) (*T, error) {
+	tx := dao.db.Model(&dao.model)
+	filter.BuildStatement(tx)
+
+	var res T
+	if err := tx.Take(&res).Error; err != nil {
+		return nil, err
+	}
+	return &res, nil
 }
 
 func (dao DAO[T]) Count(ctx context.Context, filter Filter) (int64, error) {

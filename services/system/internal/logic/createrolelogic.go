@@ -6,10 +6,10 @@ import (
 
 	"infra/pkg/dao"
 	"infra/pkg/errorx"
+	"infra/services/system/internal/pkg/useraccount"
+	"infra/services/system/internal/store"
 	"infra/services/system/internal/svc"
 	v1 "infra/services/system/pb/v1"
-	"infra/services/system/pkg/cache"
-	"infra/services/system/pkg/useraccount"
 	"infra/utils"
 
 	"github.com/jinzhu/copier"
@@ -39,7 +39,7 @@ func (l *CreateRoleLogic) CreateRole(in *v1.CreateRoleReq) (*v1.CommonIdDataResp
 		return nil, errx.Wrap("角色名必传")
 	}
 
-	mutex, err := utils.NewRedLockUtil(cache.RedisClient).Lock(l.ctx, in.Name+":"+in.ForUserType, 3*time.Second)
+	mutex, err := utils.NewRedLockUtil(store.RedisClient).Lock(l.ctx, in.Name+":"+in.ForUserType, 3*time.Second)
 	if err != nil {
 		return nil, errx.WrapErr(err)
 	}

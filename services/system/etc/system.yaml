@@ -1,6 +1,5 @@
 Name: system.rpc
-ListenOn: 0.0.0.0:8080
-Etcd:
-  Hosts:
-  - 127.0.0.1:2379
+ListenOn: 0.0.0.0:8001
+Consul:
+  Host: 192.168.174.129:8500
   Key: system.rpc

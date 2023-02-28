@@ -2,15 +2,15 @@ package authentication
 
 import (
 	"context"
-	"infra/services/system/pkg/cache"
+	"infra/services/system/internal/store"
 )
 
 func GetAuthVer(ctx context.Context, gid string) (string, error) {
-	return cache.RedisClient.Get(ctx, string(BuildAuthVerKey(gid))).Result()
+	return store.RedisClient.Get(ctx, string(BuildAuthVerKey(gid))).Result()
 }
 
 func UpdateAuthVer(ctx context.Context, gid string) error {
-	_, err := cache.RedisClient.Incr(ctx, string(BuildAuthVerKey(gid))).Result()
+	_, err := store.RedisClient.Incr(ctx, string(BuildAuthVerKey(gid))).Result()
 	if err != nil {
 		return err
 	}

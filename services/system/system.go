@@ -6,6 +6,7 @@ import (
 	consulconfig "infra/pkg/config"
 	"infra/pkg/errorx"
 	"infra/services/system/internal/config"
+	"infra/services/system/internal/pkg/authentication"
 	"infra/services/system/internal/server"
 	"infra/services/system/internal/svc"
 	v1 "infra/services/system/pb/v1"
@@ -36,7 +37,7 @@ func main() {
 			logx.SetLevel(logx.ErrorLevel)
 		}
 	})
-	s.AddUnaryInterceptors(errorx.UnaryExpectErrorInterceptor)
+	s.AddUnaryInterceptors(errorx.UnaryExpectErrorInterceptor, authentication.UnaryAuthenticationInterceptor)
 	s.AddStreamInterceptors(errorx.StreamExpectErrorInterceptor)
 
 	defer s.Stop()

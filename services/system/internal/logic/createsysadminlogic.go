@@ -6,10 +6,10 @@ import (
 
 	"infra/pkg/dao"
 	"infra/pkg/errorx"
+	"infra/services/system/internal/pkg/useraccount"
+	"infra/services/system/internal/store"
 	"infra/services/system/internal/svc"
 	v1 "infra/services/system/pb/v1"
-	"infra/services/system/pkg/cache"
-	"infra/services/system/pkg/useraccount"
 	"infra/utils"
 
 	"github.com/jinzhu/copier"
@@ -45,7 +45,7 @@ func (l *CreateSysadminLogic) CreateSysadmin(in *v1.CreateSysadminReq) (*v1.Comm
 		return nil, errx.Wrap("密码超过16个")
 	}
 
-	mutex, err := utils.NewRedLockUtil(cache.RedisClient).Lock(l.ctx, in.Name, 3*time.Second)
+	mutex, err := utils.NewRedLockUtil(store.RedisClient).Lock(l.ctx, in.Name, 3*time.Second)
 	if err != nil {
 		return nil, errx.WrapErr(err)
 	}

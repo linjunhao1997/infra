@@ -6,10 +6,11 @@ import (
 
 	"infra/pkg/dao"
 	"infra/pkg/errorx"
+	"infra/services/system/internal/store"
 	"infra/services/system/internal/svc"
 	v1 "infra/services/system/pb/v1"
-	"infra/services/system/pkg/cache"
-	"infra/services/system/pkg/useraccount"
+
+	"infra/services/system/internal/pkg/useraccount"
 	"infra/types"
 	"infra/utils"
 
@@ -50,7 +51,7 @@ func (l *UpdateRoleLogic) UpdateRole(in *v1.UpdateRoleReq) (*v1.CommonResp, erro
 		return nil, errx.WrapErr(err)
 	}
 
-	mutex, err := utils.NewRedLockUtil(cache.RedisClient).Lock(l.ctx, latest.Name, 3*time.Second)
+	mutex, err := utils.NewRedLockUtil(store.RedisClient).Lock(l.ctx, latest.Name, 3*time.Second)
 	if err != nil {
 		return nil, errx.WrapErr(err)
 	}

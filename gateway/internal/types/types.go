@@ -27,6 +27,7 @@ type CommonPageResp struct {
 }
 
 type GetAuthTokenReq struct {
+	UserType         string            `json:"userType"`
 	InternalAuthMode *InternalAuthMode `json:"internalAuthMode"`
 	SsoAuthMode      *SSOAuthMode      `json:"ssoAuthMode"`
 	Oauth2AuthMode   *Oauth2AuthMode   `json:"oauth2AuthMode"`

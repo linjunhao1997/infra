@@ -1,5 +1,6 @@
 type (
     GetAuthTokenReq {
+        UserType string `json:"userType"`
         InternalAuthMode *InternalAuthMode `json:"internalAuthMode"`
         ssoAuthMode *SSOAuthMode `json:"ssoAuthMode"`
         oauth2AuthMode *Oauth2AuthMode `json:"oauth2AuthMode"`

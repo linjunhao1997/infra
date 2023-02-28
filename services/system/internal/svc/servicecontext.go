@@ -1,8 +1,8 @@
 package svc
 
 import (
-	"infra/server"
 	"infra/services/system/internal/config"
+	"infra/services/system/internal/store"
 
 	"gorm.io/gorm"
 )
@@ -15,6 +15,10 @@ type ServiceContext struct {
 func NewServiceContext(c config.Config) *ServiceContext {
 	return &ServiceContext{
 		Config: c,
-		DB:     server.GormDB,
+		DB:     store.GormDB,
 	}
+}
+
+func (ctx *ServiceContext) Service() SystemService {
+	return NewSystemService(ctx)
 }

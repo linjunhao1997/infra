@@ -5,9 +5,9 @@ import (
 
 	"infra/pkg/dao"
 	"infra/pkg/errorx"
+	"infra/services/system/internal/pkg/useraccount"
 	"infra/services/system/internal/svc"
 	v1 "infra/services/system/pb/v1"
-	"infra/services/system/pkg/useraccount"
 
 	"github.com/jinzhu/copier"
 	"github.com/zeromicro/go-zero/core/logx"
