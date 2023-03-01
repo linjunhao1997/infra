@@ -1,9 +1,0 @@
-import (
-	"common.api"
-	"gateway_authentication.api"
-	"gateway_authorization_webapi_rest.api"
-	"gateway_useraccount_admin_rest.api"
-	"gateway_useraccount_role_rest.api"
-	"gateway_useraccount_sysadmin_rest.api"
-	"gateway_useraccount_user_rest.api"
-)

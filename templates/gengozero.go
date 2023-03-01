@@ -1,6 +1,7 @@
 package templates
 
 import (
+	"embed"
 	"infra/types"
 	"infra/utils"
 	"io"
@@ -10,8 +11,17 @@ import (
 	"text/template"
 )
 
+//go:embed resource.api.tpl resource.proto.tpl
+var f embed.FS
+
 func GenResourceGoZeroApi(tplFilePath, targetDirPath, serviceName string, datas ...interface{}) error {
-	bytes, err := os.ReadFile(tplFilePath)
+	var bytes []byte
+	var err error
+	if tplFilePath == "" {
+		bytes, err = f.ReadFile("resource.api.tpl")
+	} else {
+		bytes, err = os.ReadFile(tplFilePath)
+	}
 	if err != nil && err != io.EOF {
 		return err
 	}
@@ -27,7 +37,7 @@ func GenResourceGoZeroApi(tplFilePath, targetDirPath, serviceName string, datas 
 	}
 
 	for _, data := range datas {
-		fileName := "gateway" + "_" + strings.ToLower(strings.ReplaceAll(reflect.TypeOf(data).String(), ".", "_")+"_rest.api")
+		fileName := "apiserver" + "_" + strings.ToLower(strings.ReplaceAll(reflect.TypeOf(data).String(), ".", "_")+"_rest.api")
 		file, err := os.OpenFile(targetDirPath+"/"+fileName, os.O_RDWR|os.O_CREATE, 0766)
 		if err != nil {
 			return err
@@ -254,7 +264,13 @@ func getQueryRespJsonFields(data interface{}) []*JsonField {
 }
 
 func GenResourceGoZeroProto(tplFilePath, targetDirPath, serviceName string, datas ...interface{}) error {
-	bytes, err := os.ReadFile(tplFilePath)
+	var bytes []byte
+	var err error
+	if tplFilePath == "" {
+		bytes, err = f.ReadFile("resource.proto.tpl")
+	} else {
+		bytes, err = os.ReadFile(tplFilePath)
+	}
 	if err != nil && err != io.EOF {
 		return err
 	}

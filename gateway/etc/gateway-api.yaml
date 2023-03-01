@@ -1,5 +1,0 @@
-Name: gateway-api
-Host: 0.0.0.0
-Port: 8080
-SystemSvc: 
-  Target: consul://192.168.174.129:8500/system.rpc?wait=14s

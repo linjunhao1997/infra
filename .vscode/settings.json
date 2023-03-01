@@ -1,7 +1,7 @@
 // https://github.com/protocolbuffers/protobuf/releases 将src/google目录拷贝到GOPATH的src目录下，插件才不会报找不到any等错误
 {
     "protoc": {
-        "path": "C:/Users/---/go/bin/protoc",
+        "path": "C:/Users/林俊浩/go/bin/protoc",
         "compile_on_save": false,
         "options": [
             "--proto_path=${env.GOPATH}/src"

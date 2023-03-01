@@ -81,7 +81,7 @@ type (
     group: {{ .ModuleName }}/{{ toLower .ResourceName }}
     prefix: {{ .ServiceName }}/api/v1
 )
-service gateway-api {
+service apiserver-api {
     @handler Query{{ .ResourceName }}Detail
     get /{{ .ModuleName }}/{{ toLower .ResourceName }}/:id (Query{{ .ResourceName }}DetailReq) returns (Query{{ .ResourceName }}DetailResp)
 

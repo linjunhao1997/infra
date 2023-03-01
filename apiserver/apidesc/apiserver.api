@@ -1,0 +1,9 @@
+import (
+	"common.api"
+	"apiserver_authentication.api"
+	"apiserver_authorization_webapi_rest.api"
+	"apiserver_useraccount_admin_rest.api"
+	"apiserver_useraccount_role_rest.api"
+	"apiserver_useraccount_sysadmin_rest.api"
+	"apiserver_useraccount_user_rest.api"
+)

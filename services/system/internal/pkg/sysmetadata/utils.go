@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"infra/services/system/internal/pkg/store"
+	"infra/services/system/internal/store"
 	"infra/types"
 	"strings"
 	"time"
