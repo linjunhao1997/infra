@@ -20,3 +20,11 @@ func (role *Role) TableName() string {
 }
 
 type Roles []*Role
+
+func (roles Roles) Names() []string {
+	res := make([]string, 0, len(roles))
+	for _, e := range roles {
+		res = append(res, e.Name)
+	}
+	return res
+}

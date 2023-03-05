@@ -1,21 +1,21 @@
 package types
 
 const (
-	UserAccountTypeSysUser = "sysuser"
-	UserAccountTypeAdmin   = "admin"
-	UserAccountTypeUser    = "user"
+	UserAccountTypeSysadmin = "sysadmin"
+	UserAccountTypeAdmin    = "admin"
+	UserAccountTypeUser     = "user"
 )
 
 var UserAccountType = &userAccountType{
-	SysUser: UserAccountTypeSysUser,
-	Admin:   UserAccountTypeAdmin,
-	User:    UserAccountTypeUser,
+	Sysadmin: UserAccountTypeSysadmin,
+	Admin:    UserAccountTypeAdmin,
+	User:     UserAccountTypeUser,
 }
 
 // UserAccount 用户类型
 type userAccountType struct {
 	// 系统 管理员
-	SysUser string
+	Sysadmin string
 	// 后台 管理员
 	Admin string
 	// 用户

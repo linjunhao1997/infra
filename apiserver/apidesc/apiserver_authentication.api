@@ -32,6 +32,12 @@ type (
     GetAuthTokenData {
         AuthToken string `json:"authToken"`
     }
+
+    InternalAuthReq {
+         Uid *string `json:"uid"`
+        Email *string `json:"email"`
+        Pwd string `json:"pwd"`
+    }
 )
 
 @server(
@@ -39,6 +45,6 @@ type (
     prefix: system/api/v1
 )
 service apiserver-api {
-    @handler GetAuthToken
-    post /authentication/getauthtoken (GetAuthTokenReq) returns (GetAuthTokenResp)
+    @handler GetAuthTokenByInternal
+    post /authentication/internal/getauthtoken (InternalAuthReq) returns (GetAuthTokenResp)
 }

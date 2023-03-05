@@ -17,14 +17,16 @@ func UnaryAuthenticationInterceptor(ctx context.Context, req interface{}, info *
 	}
 
 	authToken := vals1[0]
-	userSession, err := GetUserSession(ctx, authToken)
+	userSession, err := NewUserSessionCacheRegistry(authToken).Get(ctx)
 	if err != nil {
 		return nil, errorx.ErrAuthenticationFalied.WrapErr(err)
 	}
-	ver, err := GetAuthVer(ctx, userSession.Gid)
+
+	ver, err := NewAuthVerCacheRegistry(userSession.Gid).Get(ctx)
 	if err != nil {
 		return nil, errorx.ErrAuthenticationFalied.WrapErr(err)
 	}
+
 	if ver != userSession.AuthVer {
 		return nil, errorx.ErrAuthenticationInfoExpired
 	}
@@ -41,19 +43,19 @@ func StreamAuthenticationInterceptor(srv interface{}, ss grpc.ServerStream, info
 	}
 
 	authToken := vals1[0]
-	userSession, err := GetUserSession(ss.Context(), authToken)
+	userSession, err := NewUserSessionCacheRegistry(authToken).Get(ss.Context())
 	if err != nil {
 		return errorx.ErrAuthenticationFalied.WrapErr(err)
 	}
 
-	ver, err := GetAuthVer(ss.Context(), userSession.Gid)
+	ver, err := NewAuthVerCacheRegistry(userSession.Gid).Get(ss.Context())
 	if err != nil {
 		return errorx.ErrAuthenticationFalied.WrapErr(err)
 	}
+
 	if ver != userSession.AuthVer {
 		return errorx.ErrAuthenticationInfoExpired
 	}
-
 	return handler(srv, ss)
 
 }

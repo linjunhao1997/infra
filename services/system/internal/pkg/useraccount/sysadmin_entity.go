@@ -1,6 +1,7 @@
 package useraccount
 
 import (
+	"infra/services/system/internal/store"
 	"time"
 
 	nanoid "github.com/matoous/go-nanoid/v2"
@@ -10,6 +11,7 @@ import (
 type Sysadmin struct {
 	Id int64 `gorm:"column:id;primaryKey" json:"id,string" gozero:"queryresp"`
 	//禁止修改
+	Gid      string    `gorm:"column:gid" json:"gid" gozero:"queryresp"`
 	Uid      string    `gorm:"column:uid" json:"uid" gozero:"queryresp;queryreq"`
 	Name     string    `gorm:"column:name" json:"name" gozero:"queryresp;createreq;updatereq;queryreq"`
 	Pwd      string    `gorm:"column:pwd" json:"pwd"  gozero:"createreq;updatereq"`
@@ -40,4 +42,11 @@ func (user *Sysadmin) GenerateUid() *Sysadmin {
 	uid, _ := nanoid.New()
 	user.Uid = RootTag + uid
 	return user
+}
+
+func (user *Sysadmin) GetRoles() (Roles, error) {
+	if err := store.GormDB.Model(Sysadmin{}).Preload("Roles", `id = ?`, user.Id).Find(user).Error; err != nil {
+		return nil, err
+	}
+	return user.Roles, nil
 }

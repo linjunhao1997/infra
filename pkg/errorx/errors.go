@@ -6,6 +6,7 @@ var (
 	// 认证失败
 	ErrAuthenticationFalied      = NewExpectError(10010001, "authentication failed")
 	ErrAuthenticationInfoExpired = NewExpectError(10010002, "authentication info expired")
+	ErrAuthenticationUnsupported = NewExpectError(10010003, "authentication unsupported")
 
 	// 授权失败
 	ErrAuthorizationFalied = NewExpectError(10020001, "authorization failed")
@@ -16,7 +17,8 @@ var (
 	ErrSysadminCreateFailed = NewExpectError(10030001, "sysadmin create failed")
 	ErrSysadminUpdateFailed = NewExpectError(10030002, "sysadmin update failed")
 	ErrSysadminDeleteFailed = NewExpectError(10030003, "sysadmin delete failed")
-	ErrSysadminrQueryFailed = NewExpectError(10030004, "sysadmin query failed")
+	ErrSysadminQueryFailed  = NewExpectError(10030004, "sysadmin query failed")
+	ErrSysadminAuthFalied   = NewExpectError(10030005, "sysadmin authenticate failed")
 
 	ErrAdminNotFound     = NewExpectError(10040000, "admin not found")
 	ErrAdminCreateFailed = NewExpectError(10040001, "admin create failed")
