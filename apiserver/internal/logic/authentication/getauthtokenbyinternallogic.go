@@ -10,26 +10,27 @@ import (
 	"github.com/zeromicro/go-zero/core/logx"
 )
 
-type GetAuthTokenLogic struct {
+type GetAuthTokenByInternalLogic struct {
 	logx.Logger
 	ctx    context.Context
 	svcCtx *svc.ServiceContext
 }
 
-func NewGetAuthTokenLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetAuthTokenLogic {
-	return &GetAuthTokenLogic{
+func NewGetAuthTokenByInternalLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetAuthTokenByInternalLogic {
+	return &GetAuthTokenByInternalLogic{
 		Logger: logx.WithContext(ctx),
 		ctx:    ctx,
 		svcCtx: svcCtx,
 	}
 }
 
-func (l *GetAuthTokenLogic) GetAuthToken(req *types.GetAuthTokenReq) (resp *types.GetAuthTokenResp, err error) {
+func (l *GetAuthTokenByInternalLogic) GetAuthTokenByInternal(req *types.InternalAuthReq) (resp *types.GetAuthTokenResp, err error) {
 	res, err := l.svcCtx.SystemSvc.GetAuthToken(l.ctx, &v1.GetAuthTokenReq{
+		UserType: req.UserType,
 		InternalAuthMode: &v1.InternalAuthMode{
-			Uid:   req.InternalAuthMode.Uid,
-			Email: req.InternalAuthMode.Email,
-			Pwd:   req.InternalAuthMode.Pwd,
+			Uid:   req.Uid,
+			Email: req.Email,
+			Pwd:   req.Pwd,
 		},
 	})
 	if err != nil {

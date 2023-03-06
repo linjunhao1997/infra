@@ -21,10 +21,10 @@ type InternalAuthenticator struct {
 
 type InternalAuthInfo struct {
 	UserType string
-	Email    string
-	Phone    string
-	Uid      string
-	pwd      string
+	Email    *string
+	Phone    *string
+	Uid      *string
+	Pwd      string
 }
 
 func NewInternalAuthenticator(db *gorm.DB) *InternalAuthenticator {
@@ -34,12 +34,12 @@ func NewInternalAuthenticator(db *gorm.DB) *InternalAuthenticator {
 }
 
 func (authenticator *InternalAuthenticator) Authenticate(ctx context.Context, info InternalAuthInfo) (string, error) {
-	filter := dao.Filter{Eq: []dao.Eq{{ColumnName: "pwd", ColumnValue: info.pwd}}}
-	if info.Email != "" {
+	filter := dao.Filter{Eq: []dao.Eq{{ColumnName: "pwd", ColumnValue: info.Pwd}}}
+	if info.Email != nil {
 		filter.Eq = append(filter.Eq, dao.Eq{ColumnName: "email", ColumnValue: info.Email})
-	} else if info.Phone != "" {
+	} else if info.Phone != nil {
 		filter.Eq = append(filter.Eq, dao.Eq{ColumnName: "phone", ColumnValue: info.Phone})
-	} else if info.Uid != "" {
+	} else if info.Uid != nil {
 		filter.Eq = append(filter.Eq, dao.Eq{ColumnName: "uid", ColumnValue: info.Uid})
 	}
 
@@ -49,17 +49,17 @@ func (authenticator *InternalAuthenticator) Authenticate(ctx context.Context, in
 	case types.UserAccountType.Sysadmin:
 		sysadmin, err := dao.NewDAO[useraccount.Sysadmin](authenticator.db).FindOne(ctx, filter)
 		if err != nil {
-			return "", errorx.ErrSysadminAuthFalied
+			return "", errorx.ErrSysadminAuthFalied.WrapErr(err)
 		}
 
 		ver, err := NewAuthVerCacheRegistry(sysadmin.Gid).Get(ctx)
 		if err != nil {
-			return "", err
+			return "", errorx.ErrSysadminAuthFalied.WrapErr(err)
 		}
 
 		roles, err := sysadmin.GetRoles()
 		if err != nil {
-			return "", err
+			return "", errorx.ErrSysadminAuthFalied.WrapErr(err)
 		}
 
 		if err := cacheRegistry.Cache(ctx, UserSession{
@@ -71,8 +71,8 @@ func (authenticator *InternalAuthenticator) Authenticate(ctx context.Context, in
 		}); err != nil {
 			return "", err
 		}
-		return authToken, err
+		return authToken, nil
 	default:
-		return "", errorx.ErrAuthenticationUnsupported
+		return "", errorx.ErrAuthenticationUserTypeUnsupported
 	}
 }

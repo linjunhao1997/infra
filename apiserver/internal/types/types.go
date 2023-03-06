@@ -34,8 +34,8 @@ type GetAuthTokenReq struct {
 }
 
 type InternalAuthMode struct {
-	Uid   *string `json:"uid"`
-	Email *string `json:"email"`
+	Uid   *string `json:"uid,optional"`
+	Email *string `json:"email,optional"`
 	Pwd   string  `json:"pwd"`
 }
 
@@ -58,6 +58,13 @@ type GetAuthTokenResp struct {
 
 type GetAuthTokenData struct {
 	AuthToken string `json:"authToken"`
+}
+
+type InternalAuthReq struct {
+	UserType string  `json:"userType"`
+	Uid      *string `json:"uid,optional"`
+	Email    *string `json:"email,optional"`
+	Pwd      string  `json:"pwd"`
 }
 
 type WebApiData struct {

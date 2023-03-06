@@ -7,8 +7,8 @@ type (
     }
 
     InternalAuthMode {
-        Uid *string `json:"uid"`
-        Email *string `json:"email"`
+        Uid *string `json:"uid,optional"`
+        Email *string `json:"email,optional"`
         Pwd string `json:"pwd"`
     }
 
@@ -34,8 +34,9 @@ type (
     }
 
     InternalAuthReq {
-         Uid *string `json:"uid"`
-        Email *string `json:"email"`
+        UserType string `json:"userType"`
+        Uid *string `json:"uid,optional"`
+        Email *string `json:"email,optional"`
         Pwd string `json:"pwd"`
     }
 )

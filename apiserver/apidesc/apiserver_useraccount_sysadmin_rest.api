@@ -114,7 +114,4 @@ service apiserver-api {
 
     @handler DeleteSysadmin
     delete /useraccount/sysadmin/:id (DeleteSysadminReq) returns (CommonResp)
-
-    @handler AuthenticateSysadmin
-    post /useraccount/sysadmin/authenticate (AuthenticateSysadmin) returns (CommonResp)
 }

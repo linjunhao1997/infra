@@ -20,8 +20,8 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
-				Path:    "/authentication/getauthtoken",
-				Handler: authentication.GetAuthTokenHandler(serverCtx),
+				Path:    "/authentication/internal/getauthtoken",
+				Handler: authentication.GetAuthTokenByInternalHandler(serverCtx),
 			},
 		},
 		rest.WithPrefix("/system/api/v1"),

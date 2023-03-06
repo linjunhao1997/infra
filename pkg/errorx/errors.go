@@ -4,9 +4,10 @@ var (
 	// 微服务编号2位+微服务模块2位+4位错误码
 
 	// 认证失败
-	ErrAuthenticationFalied      = NewExpectError(10010001, "authentication failed")
-	ErrAuthenticationInfoExpired = NewExpectError(10010002, "authentication info expired")
-	ErrAuthenticationUnsupported = NewExpectError(10010003, "authentication unsupported")
+	ErrAuthenticationFalied              = NewExpectError(10010001, "authentication failed")
+	ErrAuthenticationInfoExpired         = NewExpectError(10010002, "authentication info expired")
+	ErrAuthenticationAuthModeUnsupported = NewExpectError(10010003, "authentication authmode unsupported")
+	ErrAuthenticationUserTypeUnsupported = NewExpectError(10010004, "authentication usertype unsupported")
 
 	// 授权失败
 	ErrAuthorizationFalied = NewExpectError(10020001, "authorization failed")

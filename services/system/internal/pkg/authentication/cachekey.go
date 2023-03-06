@@ -32,7 +32,7 @@ func (cache *userSessionCacheRegistry) Cache(ctx context.Context, value UserSess
 	if err != nil {
 		return err
 	}
-	if _, err := store.RedisClient.Set(ctx, cache.authToken, value, time.Minute*30).Result(); err != nil {
+	if _, err := store.RedisClient.Set(ctx, cache.authToken, &value, time.Minute*30).Result(); err != nil {
 		return err
 	}
 	return nil
@@ -103,7 +103,7 @@ func (ver *authVerCacheRegistry) Get(ctx context.Context) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	res, err := store.RedisClient.Get(ctx, key).Result()
+	res, err := store.RedisClient.GetSet(ctx, key, "0").Result()
 	if err != nil {
 		return "", err
 	}

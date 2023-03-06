@@ -28,7 +28,7 @@ func NewQuerySysadminListLogic(ctx context.Context, svcCtx *svc.ServiceContext) 
 }
 
 func (l *QuerySysadminListLogic) QuerySysadminList(in *v1.QuerySysadminListReq) (*v1.QuerySysadminListResp, error) {
-	errx := errorx.ErrSysadminrQueryFailed
+	errx := errorx.ErrSysadminQueryFailed
 	adminDao := dao.NewDAO[useraccount.Sysadmin](l.svcCtx.DB)
 	admins, err := adminDao.Find(l.ctx,
 		dao.Filter{
