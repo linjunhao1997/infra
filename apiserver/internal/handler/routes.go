@@ -20,8 +20,8 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
-				Path:    "/authentication/internal/getauthtoken",
-				Handler: authentication.GetAuthTokenByInternalHandler(serverCtx),
+				Path:    "/authentication/getauthtoken",
+				Handler: authentication.GetAuthTokenHandler(serverCtx),
 			},
 		},
 		rest.WithPrefix("/system/api/v1"),
@@ -166,11 +166,6 @@ func RegisterHandlers(server *rest.Server, serverCtx *svc.ServiceContext) {
 				Method:  http.MethodDelete,
 				Path:    "/useraccount/sysadmin/:id",
 				Handler: useraccountsysadmin.DeleteSysadminHandler(serverCtx),
-			},
-			{
-				Method:  http.MethodPost,
-				Path:    "/useraccount/sysadmin/authenticate",
-				Handler: useraccountsysadmin.AuthenticateSysadminHandler(serverCtx),
 			},
 		},
 		rest.WithPrefix("/system/api/v1"),

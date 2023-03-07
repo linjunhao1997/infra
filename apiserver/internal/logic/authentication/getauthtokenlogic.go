@@ -26,6 +26,7 @@ func NewGetAuthTokenLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetA
 
 func (l *GetAuthTokenLogic) GetAuthToken(req *types.GetAuthTokenReq) (resp *types.GetAuthTokenResp, err error) {
 	res, err := l.svcCtx.SystemSvc.GetAuthToken(l.ctx, &v1.GetAuthTokenReq{
+		UserType: req.UserType,
 		InternalAuthMode: &v1.InternalAuthMode{
 			Uid:   req.InternalAuthMode.Uid,
 			Email: req.InternalAuthMode.Email,

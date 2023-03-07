@@ -2,6 +2,7 @@ package authentication
 
 import (
 	"net/http"
+	"time"
 
 	"infra/apiserver/internal/logic/authentication"
 	"infra/apiserver/internal/svc"
@@ -23,6 +24,14 @@ func GetAuthTokenHandler(svcCtx *svc.ServiceContext) http.HandlerFunc {
 		if err != nil {
 			httpx.Error(w, err)
 		} else {
+			c := http.Cookie{
+				Name:     "authToken",
+				Path:     "/",
+				Value:    resp.Data.AuthToken,
+				HttpOnly: true,
+				Expires:  time.Now().Add(30 * time.Minute),
+			}
+			w.Header().Add("Set-Cookie", c.String())
 			httpx.OkJson(w, resp)
 		}
 	}

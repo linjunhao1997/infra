@@ -1,9 +1,9 @@
 type (
     GetAuthTokenReq {
-        UserType string `json:"userType"`
-        InternalAuthMode *InternalAuthMode `json:"internalAuthMode"`
-        ssoAuthMode *SSOAuthMode `json:"ssoAuthMode"`
-        oauth2AuthMode *Oauth2AuthMode `json:"oauth2AuthMode"`
+        UserType string `form:"userType"`
+        InternalAuthMode *InternalAuthMode `json:"internalAuthMode,optional"`
+        ssoAuthMode *SSOAuthMode `json:"ssoAuthMode,optional"`
+        oauth2AuthMode *Oauth2AuthMode `json:"oauth2AuthMode,optional"`
     }
 
     InternalAuthMode {
@@ -46,6 +46,6 @@ type (
     prefix: system/api/v1
 )
 service apiserver-api {
-    @handler GetAuthTokenByInternal
-    post /authentication/internal/getauthtoken (InternalAuthReq) returns (GetAuthTokenResp)
+    @handler GetAuthToken
+    post /authentication/getauthtoken (GetAuthTokenReq) returns (GetAuthTokenResp)
 }
