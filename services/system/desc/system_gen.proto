@@ -42,7 +42,7 @@ message WebApiData {
     int64 id = 1;
     string code = 2;
     string url = 3;
-    bool isOnline = 4;
+    bool disabled = 4;
     string description = 5;
     int64 ctime = 6;
     int64 mtime = 7;
@@ -64,7 +64,7 @@ message QueryWebApiDetailResp {
 message QueryWebApiListReq {
     optional string code = 1;
     optional string url = 2;
-    optional bool isOnline = 3;
+    optional bool disabled = 3;
 }
 
 message QueryWebApiListResp {
@@ -79,7 +79,7 @@ message QueryWebApiPageReq {
     int64 pageSize = 2;
     optional string code = 3;
     optional string url = 4;
-    optional bool isOnline = 5;
+    optional bool disabled = 5;
 }
 
 message WebApiPage {
@@ -99,7 +99,7 @@ message QueryWebApiPageResp {
 message CreateWebApiReq {
     string code = 1;
     string url = 2;
-    bool isOnline = 3;
+    bool disabled = 3;
     string description = 4;
 }
 
@@ -108,7 +108,7 @@ message UpdateWebApiReq {
     int64 id = 1;
     optional string code = 2;
     optional string url = 3;
-    optional bool isOnline = 4;
+    optional bool disabled = 4;
     optional string description = 5;
 }
 
@@ -136,10 +136,6 @@ service systemService {
     rpc UpdateWebApi(UpdateWebApiReq) returns (CommonResp);
 
     rpc DeleteWebApi(DeleteWebApiReq) returns (CommonResp);
-
-
-}
-
 
 
 }

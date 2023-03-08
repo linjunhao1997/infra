@@ -38,4 +38,10 @@ var (
 	ErrRoleUpdateFailed = NewExpectError(10060002, "role update failed")
 	ErrRoleDeleteFailed = NewExpectError(10060003, "role delete failed")
 	ErrRoleQueryFailed  = NewExpectError(10060004, "role query failed")
+
+	ErrWebApiNotFound     = NewExpectError(10070000, "webapi not found")
+	ErrWebApiCreateFailed = NewExpectError(10070001, "webapi create failed")
+	ErrWebApiUpdateFailed = NewExpectError(10070002, "webapi update failed")
+	ErrWebApiDeleteFailed = NewExpectError(10070003, "webapi delete failed")
+	ErrWebApiQueryFailed  = NewExpectError(10070004, "webapi query failed")
 )

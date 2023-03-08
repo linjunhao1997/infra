@@ -146,3 +146,63 @@ func (s *SystemServiceServer) GetAuthToken(ctx context.Context, in *v1.GetAuthTo
 	l := logic.NewGetAuthTokenLogic(ctx, s.svcCtx)
 	return l.GetAuthToken(in)
 }
+
+func (s *SystemServiceServer) QueryWebElemDetail(ctx context.Context, in *v1.QueryWebElemDetailReq) (*v1.QueryWebElemDetailResp, error) {
+	l := logic.NewQueryWebElemDetailLogic(ctx, s.svcCtx)
+	return l.QueryWebElemDetail(in)
+}
+
+func (s *SystemServiceServer) QueryWebElemList(ctx context.Context, in *v1.QueryWebElemListReq) (*v1.QueryWebElemListResp, error) {
+	l := logic.NewQueryWebElemListLogic(ctx, s.svcCtx)
+	return l.QueryWebElemList(in)
+}
+
+func (s *SystemServiceServer) QueryWebElemPage(ctx context.Context, in *v1.QueryWebElemPageReq) (*v1.QueryWebElemPageResp, error) {
+	l := logic.NewQueryWebElemPageLogic(ctx, s.svcCtx)
+	return l.QueryWebElemPage(in)
+}
+
+func (s *SystemServiceServer) CreateWebElem(ctx context.Context, in *v1.CreateWebElemReq) (*v1.CommonIdDataResp, error) {
+	l := logic.NewCreateWebElemLogic(ctx, s.svcCtx)
+	return l.CreateWebElem(in)
+}
+
+func (s *SystemServiceServer) UpdateWebElem(ctx context.Context, in *v1.UpdateWebElemReq) (*v1.CommonResp, error) {
+	l := logic.NewUpdateWebElemLogic(ctx, s.svcCtx)
+	return l.UpdateWebElem(in)
+}
+
+func (s *SystemServiceServer) DeleteWebElem(ctx context.Context, in *v1.DeleteWebElemReq) (*v1.CommonResp, error) {
+	l := logic.NewDeleteWebElemLogic(ctx, s.svcCtx)
+	return l.DeleteWebElem(in)
+}
+
+func (s *SystemServiceServer) QueryWebApiDetail(ctx context.Context, in *v1.QueryWebApiDetailReq) (*v1.QueryWebApiDetailResp, error) {
+	l := logic.NewQueryWebApiDetailLogic(ctx, s.svcCtx)
+	return l.QueryWebApiDetail(in)
+}
+
+func (s *SystemServiceServer) QueryWebApiList(ctx context.Context, in *v1.QueryWebApiListReq) (*v1.QueryWebApiListResp, error) {
+	l := logic.NewQueryWebApiListLogic(ctx, s.svcCtx)
+	return l.QueryWebApiList(in)
+}
+
+func (s *SystemServiceServer) QueryWebApiPage(ctx context.Context, in *v1.QueryWebApiPageReq) (*v1.QueryWebApiPageResp, error) {
+	l := logic.NewQueryWebApiPageLogic(ctx, s.svcCtx)
+	return l.QueryWebApiPage(in)
+}
+
+func (s *SystemServiceServer) CreateWebApi(ctx context.Context, in *v1.CreateWebApiReq) (*v1.CommonIdDataResp, error) {
+	l := logic.NewCreateWebApiLogic(ctx, s.svcCtx)
+	return l.CreateWebApi(in)
+}
+
+func (s *SystemServiceServer) UpdateWebApi(ctx context.Context, in *v1.UpdateWebApiReq) (*v1.CommonResp, error) {
+	l := logic.NewUpdateWebApiLogic(ctx, s.svcCtx)
+	return l.UpdateWebApi(in)
+}
+
+func (s *SystemServiceServer) DeleteWebApi(ctx context.Context, in *v1.DeleteWebApiReq) (*v1.CommonResp, error) {
+	l := logic.NewDeleteWebApiLogic(ctx, s.svcCtx)
+	return l.DeleteWebApi(in)
+}

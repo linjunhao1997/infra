@@ -1,0 +1,105 @@
+type (
+    WebElemData {
+        Id int64 `json:"id"`
+        Name string `json:"name"`
+        Type string `json:"type"`
+        Code string `json:"code"`
+        Disabled bool `json:"disabled"`
+        Description string `json:"description"`
+        Ctime int64 `json:"createTime"`
+        Mtime int64 `json:"updateTime"`
+        CreatorUid string `json:"creatorUid"`
+        ModifierUid string `json:"modifierUid"`
+    }
+
+    QueryWebElemDetailReq {
+        Id int64 `path:"id"`
+    }
+
+    QueryWebElemDetailResp {
+        Code uint32 `json:"code"`
+        Msg string `json:"msg"`
+        Err string `json:"err"`
+        Data *WebElemData `json:"data"`
+    }
+    
+    QueryWebElemListReq {
+    }
+
+    QueryWebElemListResp {
+        Code uint32 `json:"code"`
+        Msg string `json:"msg"`
+        Err string `json:"err"`
+        Data []*WebElemData `json:"data"`
+    }
+
+    QueryWebElemPageReq {
+        CurrentPage int64 `json:"currentPage"`
+        PageSize int64 `json:"pageSize"`
+    }
+
+    WebElemPage {
+        CurrentPage int64 `json:"currentPage"`
+        PageSize int64 `json:"pageSize"`
+        Total int64 `json:"total"`
+        List []*WebElemData `json:"list"`
+    }
+    QueryWebElemPageResp {
+        Code uint32 `json:"code"`
+        Msg string `json:"msg"`
+        Err string `json:"err"`
+        Data WebElemPage `json:"data"`
+    }
+
+    CreateWebElemReq {
+        Name string `json:"name"`
+        Type string `json:"type"`
+        Code string `json:"code"`
+        Disabled bool `json:"disabled"`
+        Description string `json:"description"`
+    }
+
+
+    UpdateWebElemReq {
+        Id int64 `path:"id"`
+        Name *string `json:"name"`
+        Disabled *bool `json:"disabled"`
+        Description *string `json:"description"`
+    }
+
+    UpsertWebElemReq {
+        Id int64 `path:"id"`
+    }
+
+    RemoveWebElemReq {
+        Id int64 `path:"id"`
+    }
+
+    DeleteWebElemReq {
+        Id int64 `path:"id"`
+    }
+)
+
+@server(
+    group: authorization/webelem
+    prefix: system/api/v1
+)
+service apiserver-api {
+    @handler QueryWebElemDetail
+    get /authorization/webelem/:id (QueryWebElemDetailReq) returns (QueryWebElemDetailResp)
+
+    @handler QueryWebElemList
+    get /authorization/webelem/list (QueryWebElemListReq) returns (QueryWebElemListResp)
+
+    @handler QueryWebElemPage
+    get /authorization/webelem/page (QueryWebElemPageReq) returns (QueryWebElemPageResp)
+
+    @handler  CreateWebElem
+    post /authorization/webelem (CreateWebElemReq) returns (CommonResp)
+
+    @handler  UpdateWebElem
+    patch /authorization/webelem/:id (UpdateWebElemReq) returns (CommonResp)
+
+    @handler DeleteWebElem
+    delete /authorization/webelem/:id (DeleteWebElemReq) returns (CommonResp)
+}

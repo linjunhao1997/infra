@@ -47,6 +47,18 @@ type SystemServiceClient interface {
 	UpdateSysadmin(ctx context.Context, in *UpdateSysadminReq, opts ...grpc.CallOption) (*CommonResp, error)
 	DeleteSysadmin(ctx context.Context, in *DeleteSysadminReq, opts ...grpc.CallOption) (*CommonResp, error)
 	GetAuthToken(ctx context.Context, in *GetAuthTokenReq, opts ...grpc.CallOption) (*GetAuthTokenResp, error)
+	QueryWebElemDetail(ctx context.Context, in *QueryWebElemDetailReq, opts ...grpc.CallOption) (*QueryWebElemDetailResp, error)
+	QueryWebElemList(ctx context.Context, in *QueryWebElemListReq, opts ...grpc.CallOption) (*QueryWebElemListResp, error)
+	QueryWebElemPage(ctx context.Context, in *QueryWebElemPageReq, opts ...grpc.CallOption) (*QueryWebElemPageResp, error)
+	CreateWebElem(ctx context.Context, in *CreateWebElemReq, opts ...grpc.CallOption) (*CommonIdDataResp, error)
+	UpdateWebElem(ctx context.Context, in *UpdateWebElemReq, opts ...grpc.CallOption) (*CommonResp, error)
+	DeleteWebElem(ctx context.Context, in *DeleteWebElemReq, opts ...grpc.CallOption) (*CommonResp, error)
+	QueryWebApiDetail(ctx context.Context, in *QueryWebApiDetailReq, opts ...grpc.CallOption) (*QueryWebApiDetailResp, error)
+	QueryWebApiList(ctx context.Context, in *QueryWebApiListReq, opts ...grpc.CallOption) (*QueryWebApiListResp, error)
+	QueryWebApiPage(ctx context.Context, in *QueryWebApiPageReq, opts ...grpc.CallOption) (*QueryWebApiPageResp, error)
+	CreateWebApi(ctx context.Context, in *CreateWebApiReq, opts ...grpc.CallOption) (*CommonIdDataResp, error)
+	UpdateWebApi(ctx context.Context, in *UpdateWebApiReq, opts ...grpc.CallOption) (*CommonResp, error)
+	DeleteWebApi(ctx context.Context, in *DeleteWebApiReq, opts ...grpc.CallOption) (*CommonResp, error)
 }
 
 type systemServiceClient struct {
@@ -282,6 +294,114 @@ func (c *systemServiceClient) GetAuthToken(ctx context.Context, in *GetAuthToken
 	return out, nil
 }
 
+func (c *systemServiceClient) QueryWebElemDetail(ctx context.Context, in *QueryWebElemDetailReq, opts ...grpc.CallOption) (*QueryWebElemDetailResp, error) {
+	out := new(QueryWebElemDetailResp)
+	err := c.cc.Invoke(ctx, "/system.v1.systemService/QueryWebElemDetail", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *systemServiceClient) QueryWebElemList(ctx context.Context, in *QueryWebElemListReq, opts ...grpc.CallOption) (*QueryWebElemListResp, error) {
+	out := new(QueryWebElemListResp)
+	err := c.cc.Invoke(ctx, "/system.v1.systemService/QueryWebElemList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *systemServiceClient) QueryWebElemPage(ctx context.Context, in *QueryWebElemPageReq, opts ...grpc.CallOption) (*QueryWebElemPageResp, error) {
+	out := new(QueryWebElemPageResp)
+	err := c.cc.Invoke(ctx, "/system.v1.systemService/QueryWebElemPage", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *systemServiceClient) CreateWebElem(ctx context.Context, in *CreateWebElemReq, opts ...grpc.CallOption) (*CommonIdDataResp, error) {
+	out := new(CommonIdDataResp)
+	err := c.cc.Invoke(ctx, "/system.v1.systemService/CreateWebElem", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *systemServiceClient) UpdateWebElem(ctx context.Context, in *UpdateWebElemReq, opts ...grpc.CallOption) (*CommonResp, error) {
+	out := new(CommonResp)
+	err := c.cc.Invoke(ctx, "/system.v1.systemService/UpdateWebElem", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *systemServiceClient) DeleteWebElem(ctx context.Context, in *DeleteWebElemReq, opts ...grpc.CallOption) (*CommonResp, error) {
+	out := new(CommonResp)
+	err := c.cc.Invoke(ctx, "/system.v1.systemService/DeleteWebElem", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *systemServiceClient) QueryWebApiDetail(ctx context.Context, in *QueryWebApiDetailReq, opts ...grpc.CallOption) (*QueryWebApiDetailResp, error) {
+	out := new(QueryWebApiDetailResp)
+	err := c.cc.Invoke(ctx, "/system.v1.systemService/QueryWebApiDetail", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *systemServiceClient) QueryWebApiList(ctx context.Context, in *QueryWebApiListReq, opts ...grpc.CallOption) (*QueryWebApiListResp, error) {
+	out := new(QueryWebApiListResp)
+	err := c.cc.Invoke(ctx, "/system.v1.systemService/QueryWebApiList", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *systemServiceClient) QueryWebApiPage(ctx context.Context, in *QueryWebApiPageReq, opts ...grpc.CallOption) (*QueryWebApiPageResp, error) {
+	out := new(QueryWebApiPageResp)
+	err := c.cc.Invoke(ctx, "/system.v1.systemService/QueryWebApiPage", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *systemServiceClient) CreateWebApi(ctx context.Context, in *CreateWebApiReq, opts ...grpc.CallOption) (*CommonIdDataResp, error) {
+	out := new(CommonIdDataResp)
+	err := c.cc.Invoke(ctx, "/system.v1.systemService/CreateWebApi", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *systemServiceClient) UpdateWebApi(ctx context.Context, in *UpdateWebApiReq, opts ...grpc.CallOption) (*CommonResp, error) {
+	out := new(CommonResp)
+	err := c.cc.Invoke(ctx, "/system.v1.systemService/UpdateWebApi", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *systemServiceClient) DeleteWebApi(ctx context.Context, in *DeleteWebApiReq, opts ...grpc.CallOption) (*CommonResp, error) {
+	out := new(CommonResp)
+	err := c.cc.Invoke(ctx, "/system.v1.systemService/DeleteWebApi", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SystemServiceServer is the server API for SystemService service.
 // All implementations must embed UnimplementedSystemServiceServer
 // for forward compatibility
@@ -311,6 +431,18 @@ type SystemServiceServer interface {
 	UpdateSysadmin(context.Context, *UpdateSysadminReq) (*CommonResp, error)
 	DeleteSysadmin(context.Context, *DeleteSysadminReq) (*CommonResp, error)
 	GetAuthToken(context.Context, *GetAuthTokenReq) (*GetAuthTokenResp, error)
+	QueryWebElemDetail(context.Context, *QueryWebElemDetailReq) (*QueryWebElemDetailResp, error)
+	QueryWebElemList(context.Context, *QueryWebElemListReq) (*QueryWebElemListResp, error)
+	QueryWebElemPage(context.Context, *QueryWebElemPageReq) (*QueryWebElemPageResp, error)
+	CreateWebElem(context.Context, *CreateWebElemReq) (*CommonIdDataResp, error)
+	UpdateWebElem(context.Context, *UpdateWebElemReq) (*CommonResp, error)
+	DeleteWebElem(context.Context, *DeleteWebElemReq) (*CommonResp, error)
+	QueryWebApiDetail(context.Context, *QueryWebApiDetailReq) (*QueryWebApiDetailResp, error)
+	QueryWebApiList(context.Context, *QueryWebApiListReq) (*QueryWebApiListResp, error)
+	QueryWebApiPage(context.Context, *QueryWebApiPageReq) (*QueryWebApiPageResp, error)
+	CreateWebApi(context.Context, *CreateWebApiReq) (*CommonIdDataResp, error)
+	UpdateWebApi(context.Context, *UpdateWebApiReq) (*CommonResp, error)
+	DeleteWebApi(context.Context, *DeleteWebApiReq) (*CommonResp, error)
 	mustEmbedUnimplementedSystemServiceServer()
 }
 
@@ -392,6 +524,42 @@ func (UnimplementedSystemServiceServer) DeleteSysadmin(context.Context, *DeleteS
 }
 func (UnimplementedSystemServiceServer) GetAuthToken(context.Context, *GetAuthTokenReq) (*GetAuthTokenResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAuthToken not implemented")
+}
+func (UnimplementedSystemServiceServer) QueryWebElemDetail(context.Context, *QueryWebElemDetailReq) (*QueryWebElemDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryWebElemDetail not implemented")
+}
+func (UnimplementedSystemServiceServer) QueryWebElemList(context.Context, *QueryWebElemListReq) (*QueryWebElemListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryWebElemList not implemented")
+}
+func (UnimplementedSystemServiceServer) QueryWebElemPage(context.Context, *QueryWebElemPageReq) (*QueryWebElemPageResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryWebElemPage not implemented")
+}
+func (UnimplementedSystemServiceServer) CreateWebElem(context.Context, *CreateWebElemReq) (*CommonIdDataResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateWebElem not implemented")
+}
+func (UnimplementedSystemServiceServer) UpdateWebElem(context.Context, *UpdateWebElemReq) (*CommonResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateWebElem not implemented")
+}
+func (UnimplementedSystemServiceServer) DeleteWebElem(context.Context, *DeleteWebElemReq) (*CommonResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteWebElem not implemented")
+}
+func (UnimplementedSystemServiceServer) QueryWebApiDetail(context.Context, *QueryWebApiDetailReq) (*QueryWebApiDetailResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryWebApiDetail not implemented")
+}
+func (UnimplementedSystemServiceServer) QueryWebApiList(context.Context, *QueryWebApiListReq) (*QueryWebApiListResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryWebApiList not implemented")
+}
+func (UnimplementedSystemServiceServer) QueryWebApiPage(context.Context, *QueryWebApiPageReq) (*QueryWebApiPageResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryWebApiPage not implemented")
+}
+func (UnimplementedSystemServiceServer) CreateWebApi(context.Context, *CreateWebApiReq) (*CommonIdDataResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateWebApi not implemented")
+}
+func (UnimplementedSystemServiceServer) UpdateWebApi(context.Context, *UpdateWebApiReq) (*CommonResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateWebApi not implemented")
+}
+func (UnimplementedSystemServiceServer) DeleteWebApi(context.Context, *DeleteWebApiReq) (*CommonResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteWebApi not implemented")
 }
 func (UnimplementedSystemServiceServer) mustEmbedUnimplementedSystemServiceServer() {}
 
@@ -856,6 +1024,222 @@ func _SystemService_GetAuthToken_Handler(srv interface{}, ctx context.Context, d
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SystemService_QueryWebElemDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryWebElemDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SystemServiceServer).QueryWebElemDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/system.v1.systemService/QueryWebElemDetail",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SystemServiceServer).QueryWebElemDetail(ctx, req.(*QueryWebElemDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SystemService_QueryWebElemList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryWebElemListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SystemServiceServer).QueryWebElemList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/system.v1.systemService/QueryWebElemList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SystemServiceServer).QueryWebElemList(ctx, req.(*QueryWebElemListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SystemService_QueryWebElemPage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryWebElemPageReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SystemServiceServer).QueryWebElemPage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/system.v1.systemService/QueryWebElemPage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SystemServiceServer).QueryWebElemPage(ctx, req.(*QueryWebElemPageReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SystemService_CreateWebElem_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateWebElemReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SystemServiceServer).CreateWebElem(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/system.v1.systemService/CreateWebElem",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SystemServiceServer).CreateWebElem(ctx, req.(*CreateWebElemReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SystemService_UpdateWebElem_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateWebElemReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SystemServiceServer).UpdateWebElem(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/system.v1.systemService/UpdateWebElem",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SystemServiceServer).UpdateWebElem(ctx, req.(*UpdateWebElemReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SystemService_DeleteWebElem_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteWebElemReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SystemServiceServer).DeleteWebElem(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/system.v1.systemService/DeleteWebElem",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SystemServiceServer).DeleteWebElem(ctx, req.(*DeleteWebElemReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SystemService_QueryWebApiDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryWebApiDetailReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SystemServiceServer).QueryWebApiDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/system.v1.systemService/QueryWebApiDetail",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SystemServiceServer).QueryWebApiDetail(ctx, req.(*QueryWebApiDetailReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SystemService_QueryWebApiList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryWebApiListReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SystemServiceServer).QueryWebApiList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/system.v1.systemService/QueryWebApiList",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SystemServiceServer).QueryWebApiList(ctx, req.(*QueryWebApiListReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SystemService_QueryWebApiPage_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(QueryWebApiPageReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SystemServiceServer).QueryWebApiPage(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/system.v1.systemService/QueryWebApiPage",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SystemServiceServer).QueryWebApiPage(ctx, req.(*QueryWebApiPageReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SystemService_CreateWebApi_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateWebApiReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SystemServiceServer).CreateWebApi(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/system.v1.systemService/CreateWebApi",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SystemServiceServer).CreateWebApi(ctx, req.(*CreateWebApiReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SystemService_UpdateWebApi_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateWebApiReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SystemServiceServer).UpdateWebApi(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/system.v1.systemService/UpdateWebApi",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SystemServiceServer).UpdateWebApi(ctx, req.(*UpdateWebApiReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _SystemService_DeleteWebApi_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(DeleteWebApiReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SystemServiceServer).DeleteWebApi(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/system.v1.systemService/DeleteWebApi",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SystemServiceServer).DeleteWebApi(ctx, req.(*DeleteWebApiReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // SystemService_ServiceDesc is the grpc.ServiceDesc for SystemService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -962,6 +1346,54 @@ var SystemService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "GetAuthToken",
 			Handler:    _SystemService_GetAuthToken_Handler,
+		},
+		{
+			MethodName: "QueryWebElemDetail",
+			Handler:    _SystemService_QueryWebElemDetail_Handler,
+		},
+		{
+			MethodName: "QueryWebElemList",
+			Handler:    _SystemService_QueryWebElemList_Handler,
+		},
+		{
+			MethodName: "QueryWebElemPage",
+			Handler:    _SystemService_QueryWebElemPage_Handler,
+		},
+		{
+			MethodName: "CreateWebElem",
+			Handler:    _SystemService_CreateWebElem_Handler,
+		},
+		{
+			MethodName: "UpdateWebElem",
+			Handler:    _SystemService_UpdateWebElem_Handler,
+		},
+		{
+			MethodName: "DeleteWebElem",
+			Handler:    _SystemService_DeleteWebElem_Handler,
+		},
+		{
+			MethodName: "QueryWebApiDetail",
+			Handler:    _SystemService_QueryWebApiDetail_Handler,
+		},
+		{
+			MethodName: "QueryWebApiList",
+			Handler:    _SystemService_QueryWebApiList_Handler,
+		},
+		{
+			MethodName: "QueryWebApiPage",
+			Handler:    _SystemService_QueryWebApiPage_Handler,
+		},
+		{
+			MethodName: "CreateWebApi",
+			Handler:    _SystemService_CreateWebApi_Handler,
+		},
+		{
+			MethodName: "UpdateWebApi",
+			Handler:    _SystemService_UpdateWebApi_Handler,
+		},
+		{
+			MethodName: "DeleteWebApi",
+			Handler:    _SystemService_DeleteWebApi_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
