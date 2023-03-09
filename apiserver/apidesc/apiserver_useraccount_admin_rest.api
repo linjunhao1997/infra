@@ -83,6 +83,8 @@ type (
 @server(
     group: useraccount/admin
     prefix: system/api/v1
+    middleware: AuthorityMiddleware
+
 )
 service apiserver-api {
     @handler QueryAdminDetail

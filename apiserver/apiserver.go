@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"net/http"
 
 	"infra/apiserver/internal/config"
 	"infra/apiserver/internal/handler"
@@ -28,6 +29,13 @@ func main() {
 
 	ctx := svc.NewServiceContext(c)
 	handler.RegisterHandlers(server, ctx)
+
+	server.Use(func(next http.HandlerFunc) http.HandlerFunc {
+		return func(w http.ResponseWriter, r *http.Request) {
+			logx.Info("global middleware")
+			next(w, r)
+		}
+	})
 
 	httpx.SetErrorHandler(errorx.GrpcExpectErrorHandler)
 

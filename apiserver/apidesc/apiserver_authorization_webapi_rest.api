@@ -88,6 +88,8 @@ type (
 @server(
     group: authorization/webapi
     prefix: system/api/v1
+    middleware: AuthorityMiddleware
+
 )
 service apiserver-api {
     @handler QueryWebApiDetail

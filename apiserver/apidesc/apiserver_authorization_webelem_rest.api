@@ -83,6 +83,8 @@ type (
 @server(
     group: authorization/webelem
     prefix: system/api/v1
+    middleware: AuthorityMiddleware
+
 )
 service apiserver-api {
     @handler QueryWebElemDetail
